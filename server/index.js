@@ -1,5 +1,6 @@
 const express = require('express');
 const morgan = require('morgan');
+const cors =require('cors');
 const app=express();
 
 const {mongoose}= require("./database");
@@ -10,6 +11,10 @@ app.set('port',process.env.PORT|| 3000);
 app.use(morgan('dev'));
 //enteder archivos Json
 app.use(express.json());
+//cors
+app.use(cors({
+    origin:'http://localhost:4200'
+}));
 //Routes
 //requerir el archivo de las rutas de la aplicacion 
 app.use('/api/employees',require('./routes/employee.routes'));

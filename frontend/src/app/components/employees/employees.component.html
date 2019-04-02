@@ -16,10 +16,30 @@
             <div class="input-field col s12">
               <input type="text" name="salary" #name="ngModel" [(ngModel)]="employeeService.selectedEmployee.salary" placeholder="Enter your salary">
             </div>
+            <div class="card-option">
+              <div class="input-field col s12">
+                
+                <button (click)="resetForm(employeeForm)" class="btn right" style="margin-left:5px;">Clean</button>
+                <button class="btn right">Save</button>
+              </div>
+            </div>
           </div>
         </form>
       </div>
     </div>
-    <div class="col s7"></div>
+    <div class="col s7">
+      <div *ngFor="let employee of employeeService.employees" class="card blue-grey darken-1">
+        <div class="card-content white-text">
+          <span class="card-title">{{employee.name}}</span>
+          <h5>Position</h5>
+          <br>
+          <p>{{employee.position}}</p>
+        </div>
+        <div class="card-title white">
+          Salary: {{employee.salary}}<br>
+          Office: {{employee.office}}
+        </div>
+      </div>
+    </div>
   </div>
 </div>
