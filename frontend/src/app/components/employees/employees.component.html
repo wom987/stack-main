@@ -3,7 +3,20 @@
     <div class="col s5">
       <div class="card-content">
         <form #employeeForm="ngForm" (ngSubmit)="addEmployee(employeeForm)">
-          
+          <div class="row">
+            <div class="input-field col s12">
+              <input type="text" name="name" #name="ngModel" [(ngModel)]="employeeService.selectedEmployee.name" placeholder="Enter your name">
+            </div>
+            <div class="input-field col s12">
+              <input type="text" name="position" #name="ngModel" [(ngModel)]="employeeService.selectedEmployee.position" placeholder="Enter your position">
+            </div>
+            <div class="input-field col s12">
+              <input type="text" name="office" #name="ngModel" [(ngModel)]="employeeService.selectedEmployee.office" placeholder="Enter your office">
+            </div>
+            <div class="input-field col s12">
+              <input type="text" name="salary" #name="ngModel" [(ngModel)]="employeeService.selectedEmployee.salary" placeholder="Enter your salary">
+            </div>
+          </div>
         </form>
       </div>
     </div>
