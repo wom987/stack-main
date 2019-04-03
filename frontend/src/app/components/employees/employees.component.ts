@@ -15,7 +15,7 @@ declare var M:any;
 })
 export class EmployeesComponent implements OnInit {
 
-  constructor(private employeeService:EmployeeService) { }
+  constructor(public employeeService:EmployeeService) { }
 
   ngOnInit() {
     this.getEmployees();
@@ -32,17 +32,48 @@ export class EmployeesComponent implements OnInit {
     this.employeeService.getEmployees()
     .subscribe(res=>{
       this.employeeService.employees= res as Employee[ ];
-      console.log(res);
+      //console.log(res);
     });
   }
   addEmployee(form:NgForm){
     this.employeeService.postEmployee(form.value)
       .subscribe(res=>{
-        this.resetForm(form);
-        M.toast({
-          html: 'Save Succesfuly'
-        });
+        if (form.value._id) {
+          this.employeeService.putEmployee(form.value)
+          .subscribe(res=>{
+            this.resetForm(form);
+          M.toast({
+            html: 'Updated Succesfuly'
+          });
+          this.getEmployees();  
+          });
+        } else {
+          this.resetForm(form);
+          M.toast({
+            html: 'Save Succesfuly'
+          });
+          this.getEmployees();  
+        }
+        
       })
+  }
+  editEmployee(employee:Employee){
+    this.employeeService.selectedEmployee=employee;
+    //this.employeeService.putEmployee(employee._id);
+  }
+  deleteEmployee(_id:string){
+    if (confirm('Are you sure?')) {
+      this.employeeService.deleteEmployee(_id) 
+      .subscribe(res=>{
+         M.toast({
+            html: 'Deleted Succesfuly'
+        });
+        this.getEmployees();
+            
+      });
+     
+    }
+    
   }
 
 
